@@ -1,19 +1,22 @@
 import React, {useEffect, useState} from 'react';
 import './Chat.scss';
 import {Avatar} from "@material-ui/core";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {setChat} from "../../../features/chatSlice";
 import db from "../../../firebase";
 import * as timeago from "timeago.js";
+import {selectUser} from "../../../features/userSlice";
 
 const Chat = (props) => {
 
     const dispatch = useDispatch();
+    const user = useSelector(selectUser);
     const [chatInfo, setChatInfo] = useState([]);
-
     useEffect(() => {
         db.collection('chats').doc(props.id).collection('messages').orderBy('timestamp', 'desc').onSnapshot(snapshot => {setChatInfo(snapshot.docs.map(doc => doc.data()))})
     }, [props.id]);
+
+    console.log(props);
 
     return (
         <div className="sidebar-chat" onClick={() => dispatch(setChat({chatId: props.id, chatName: props.chatName}))}>
@@ -23,7 +26,8 @@ const Chat = (props) => {
                 <p>{chatInfo[0]?.message.length > 17 ? chatInfo[0]?.message.substr(0, 17) + "..." : chatInfo[0]?.message}</p>
                 <small>{timeago.format(new Date(chatInfo[0]?.timestamp?.toDate()))}</small>
             </div>
-            <button className="delete-chat" onClick={() => db.collection('chats').doc(props.id).delete()}>delete</button>
+            {props.owner === user?.email ? (<button className="delete-chat" onClick={() => db.collection('chats').doc(props.id).delete()}>delete</button>) : (<></>)}
+
         </div>
 );
 };

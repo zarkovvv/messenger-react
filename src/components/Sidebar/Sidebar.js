@@ -17,13 +17,11 @@ const Sidebar = () => {
         });
     }, []);
 
-    console.log(chats);
-
     return (
         <div className="sidebar">
             <Header />
             <div className="sidebar-chats">
-                {chats.map(({id, data: {chatName}}) => (<Chat key={id} id={id} chatName={chatName}/>))}
+                {chats.map(({id, data: {chatName, owner}}) => (<Chat key={id} id={id} chatName={chatName} owner={owner}/>))}
             </div>
         </div>
     );

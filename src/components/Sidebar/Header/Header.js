@@ -18,6 +18,7 @@ const Header = () => {
         if (chatName){
             db.collection('chats').add({
                 chatName: chatName,
+                owner: user.email,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             });
         }
