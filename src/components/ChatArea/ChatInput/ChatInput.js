@@ -4,7 +4,8 @@ import {Send} from "@material-ui/icons";
 import {IconButton} from "@material-ui/core";
 import {useSelector} from "react-redux";
 import {selectChatId} from "../../../features/chatSlice";
-import firebase from "firebase";
+import firebase from "firebase/app";
+import "firebase/firestore";
 import db from "../../../firebase";
 import {selectUser} from "../../../features/userSlice";
 
