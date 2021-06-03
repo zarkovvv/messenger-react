@@ -23,8 +23,9 @@ const Chat = (props) => {
                 <p>{chatInfo[0]?.message.length > 17 ? chatInfo[0]?.message.substr(0, 17) + "..." : chatInfo[0]?.message}</p>
                 <small>{timeago.format(new Date(chatInfo[0]?.timestamp?.toDate()))}</small>
             </div>
+            <button className="delete-chat" onClick={() => db.collection('chats').doc(props.id).delete()}>delete</button>
         </div>
-    );
+);
 };
 
 export default Chat;

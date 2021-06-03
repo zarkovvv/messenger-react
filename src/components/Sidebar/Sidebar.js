@@ -9,13 +9,15 @@ const Sidebar = () => {
     const [chats, setChats] = useState([]);
 
     useEffect(() => {
-        db.collection('chats').onSnapshot(snapshot => {
+        db.collection('chats').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
             setChats(snapshot.docs.map(doc => ({
                 id: doc.id,
                 data: doc.data()
             })));
         });
     }, []);
+
+    console.log(chats);
 
     return (
         <div className="sidebar">

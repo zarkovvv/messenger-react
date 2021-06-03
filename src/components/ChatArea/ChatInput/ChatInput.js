@@ -27,6 +27,7 @@ const ChatInput = () => {
                 email: user.email,
                 displayName: user.displayName
             })
+            db.collection('chats').doc(chatId).update({timestamp: firebase.firestore.FieldValue.serverTimestamp()});
             setInput('');
         }
     };

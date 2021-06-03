@@ -5,6 +5,7 @@ import {RateReviewOutlined, Search} from "@material-ui/icons";
 import {useSelector} from "react-redux";
 import {selectUser} from "../../../features/userSlice";
 import db, {auth} from "../../../firebase";
+import firebase from "firebase/app";
 
 const Header = () => {
 
@@ -16,7 +17,8 @@ const Header = () => {
 
         if (chatName){
             db.collection('chats').add({
-                chatName: chatName
+                chatName: chatName,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
             });
         }
     }

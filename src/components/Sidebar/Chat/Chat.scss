@@ -4,9 +4,13 @@
   padding: 20px;
   border-bottom: 1px solid #535353;
   cursor: pointer;
+  position: relative;
   &:hover {
     background: cornflowerblue;
     color: white;
+    .delete-chat {
+      display: block;
+    }
   }
 }
 
@@ -18,5 +22,21 @@
     position: absolute;
     top: 5px;
     right: 0;
+  }
+}
+.delete-chat {
+  color: white;
+  cursor: pointer;
+  display: none;
+  position: absolute;
+  right: 0;
+  width: 100px;
+  margin-left: 10px;
+  background-color: #ff4d4d;
+  height: 100%;
+  border: none;
+  transition: all 0.4s;
+  &:hover {
+    background-color: #ffa5a5;
   }
 }
