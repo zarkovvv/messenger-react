@@ -1,0 +1,20 @@
+.chat-input {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  border-top: 1px solid lightgray;
+  background-color: white;
+  form {
+    flex: 1;
+  }
+  input {
+    width: 98%;
+    outline: none;
+    border: 1px solid lightgray;
+    padding: 5px;
+    border-radius: 100px;
+  }
+  .submit-button {
+    display: none;
+  }
+}

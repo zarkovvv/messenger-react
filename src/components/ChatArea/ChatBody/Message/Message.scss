@@ -1,0 +1,44 @@
+.message {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: fit-content;
+  justify-content: space-between;
+  margin: 15px;
+
+  small {
+    color: gray;
+    position: absolute;
+    font-size: 8px;
+    bottom: -5px;
+    right: 0;
+  }
+}
+
+.message-photo {
+  order: 0;
+}
+
+.message-content {
+  background-color: #e8e8e8;
+  font-size: medium;
+  padding: 15px;
+  border-radius: 20px;
+  margin: 10px auto 10px 10px;
+  word-wrap: break-word;
+  max-width: 400px;
+}
+
+.message-sender {
+  margin-left: auto;
+}
+
+.message-sender > .message-photo {
+  order: 1;
+  margin: 15px;
+}
+
+.message-sender > .message-content {
+  background-color: cornflowerblue;
+  color: white;
+}

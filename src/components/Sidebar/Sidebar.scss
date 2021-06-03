@@ -1,0 +1,17 @@
+.sidebar {
+  display: flex;
+  flex: 0.35;
+  height: 100vh;
+  flex-direction: column;
+  background-color: #ccc;
+  border-right: 1px solid #616161;
+}
+
+.sidebar-chats {
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
