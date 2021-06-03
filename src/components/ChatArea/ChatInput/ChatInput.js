@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './ChatInput.scss';
-import {MicNone} from "@material-ui/icons";
+import {Send} from "@material-ui/icons";
 import {IconButton} from "@material-ui/core";
 import {useSelector} from "react-redux";
 import {selectChatId} from "../../../features/chatSlice";
@@ -17,25 +17,26 @@ const ChatInput = () => {
 
     const sendMessage = (e) => {
         e.preventDefault();
-        db.collection('chats').doc(chatId).collection('messages').add({
-            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-            message: input,
-            uid: user.uid,
-            photo: user.photo,
-            email: user.email,
-            displayName: user.displayName
-        })
-        setInput('');
+        if (input !== '') {
+            db.collection('chats').doc(chatId).collection('messages').add({
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                message: input,
+                uid: user.uid,
+                photo: user.photo,
+                email: user.email,
+                displayName: user.displayName
+            })
+            setInput('');
+        }
     };
 
     return (
         <div className="chat-input">
-            <form>
+            <form onSubmit={sendMessage}>
                 <input value={input} onChange={e => setInput(e.target.value)} type="text" placeholder="iMessage"/>
-                <button className="submit-button" onClick={sendMessage}>Send message</button>
             </form>
-            <IconButton>
-                <MicNone className="chat-mic" />
+            <IconButton onClick={sendMessage}>
+                <Send className="send-icon" />
             </IconButton>
         </div>
     );
