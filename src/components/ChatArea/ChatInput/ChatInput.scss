@@ -3,7 +3,7 @@
   align-items: center;
   padding: 10px 20px;
   border-top: 1px solid lightgray;
-  background-color: white;
+  background-color: #ffffff;
   form {
     flex: 1;
   }
@@ -11,11 +11,22 @@
     width: 98%;
     outline: none;
     border: 1px solid lightgray;
-    padding: 5px;
+    padding: 5px 5px 5px 15px;
     border-radius: 100px;
+    background-color: transparent;
+    color: black;
+    &::placeholder {
+      color: #6d6d6d;
+    }
   }
 }
 
-.send-icon:hover {
-  color: cornflowerblue;
+.send-icon {
+  color: #000000;
+}
+
+.send-button:hover {
+  .send-icon {
+    color: #4082ff;
+  }
 }

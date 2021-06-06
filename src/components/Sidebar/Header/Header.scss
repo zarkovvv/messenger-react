@@ -10,6 +10,10 @@
   margin: 10px;
 }
 
+.create-chat {
+  color: black;
+}
+
 .sidebar-input {
   display: flex;
   align-items: center;
@@ -22,5 +26,6 @@
     border: none;
     background: transparent;
     outline: none;
+    width: 100%;
   }
 }

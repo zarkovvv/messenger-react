@@ -34,8 +34,8 @@ const Header = () => {
                 <input type="text" placeholder="Search"/>
             </div>
 
-            <IconButton variant="outlined" className="create-chat" onClick={createChat}>
-                <RateReviewOutlined />
+            <IconButton variant="outlined"  onClick={createChat}>
+                <RateReviewOutlined className="create-chat"/>
             </IconButton>
 
         </div>
