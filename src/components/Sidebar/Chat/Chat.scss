@@ -14,6 +14,9 @@
       transform: translateX(0%);
       display: block;
     }
+    small {
+      display: none;
+    }
   }
 }
 
@@ -22,6 +25,7 @@
   position: relative;
   width: 100%;
   & > small {
+    transition: all 0.2s;
     position: absolute;
     top: 5px;
     right: 0;
@@ -34,7 +38,7 @@
   transform: translateX(100%);
   position: absolute;
   right: 0;
-  width: 100px;
+  width: 70px;
   margin-left: 10px;
   background-color: #ff4d4d;
   height: 100%;
