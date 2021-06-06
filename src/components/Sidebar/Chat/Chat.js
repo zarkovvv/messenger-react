@@ -12,6 +12,7 @@ const Chat = (props) => {
     const dispatch = useDispatch();
     const user = useSelector(selectUser);
     const [chatInfo, setChatInfo] = useState([]);
+
     useEffect(() => {
         db.collection('chats').doc(props.id).collection('messages').orderBy('timestamp', 'desc').onSnapshot(snapshot => {setChatInfo(snapshot.docs.map(doc => doc.data()))})
     }, [props.id]);
@@ -24,8 +25,12 @@ const Chat = (props) => {
         }));
     }
 
+    function setCurrentChat() {
+        dispatch(setChat({chatId: props.id, chatName: props.chatName}));
+    }
+
     return (
-        <div className="sidebar-chat" onClick={() => dispatch(setChat({chatId: props.id, chatName: props.chatName}))}>
+        <div className="sidebar-chat" onClick={setCurrentChat}>
             <Avatar src={chatInfo[0]?.photo} className="chat-avatar"/>
             <div className="sidebar-chat-info">
                 <h3>{props.chatName}</h3>

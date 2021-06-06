@@ -24,10 +24,14 @@ const Header = () => {
         }
     }
 
+    async function signOut() {
+       await auth.signOut();
+    }
+
     return (
         <div className="sidebar-header">
 
-            <Avatar src={user.photo} className="sidebar-avatar" onClick={() => auth.signOut()}/>
+            <Avatar src={user.photo} className="sidebar-avatar" onClick={signOut} />
 
             <div className="sidebar-input">
                 <Search />
