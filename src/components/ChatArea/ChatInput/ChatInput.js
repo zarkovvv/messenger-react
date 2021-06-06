@@ -35,9 +35,9 @@ const ChatInput = () => {
     return (
         <div className="chat-input">
             <form onSubmit={sendMessage}>
-                <input value={input} onChange={e => setInput(e.target.value)} type="text" placeholder="iMessage"/>
+                <input disabled={chatId === null} value={input} onChange={e => setInput(e.target.value)} type="text" placeholder="Send a message..."/>
             </form>
-            <IconButton onClick={sendMessage}>
+            <IconButton className="send-button" onClick={sendMessage}>
                 <Send className="send-icon" />
             </IconButton>
         </div>

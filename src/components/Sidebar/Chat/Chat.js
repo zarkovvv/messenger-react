@@ -16,7 +16,13 @@ const Chat = (props) => {
         db.collection('chats').doc(props.id).collection('messages').orderBy('timestamp', 'desc').onSnapshot(snapshot => {setChatInfo(snapshot.docs.map(doc => doc.data()))})
     }, [props.id]);
 
-    console.log(props);
+    async function deleteChat() {
+        await db.collection('chats').doc(props.id).delete();
+        dispatch(setChat({
+            chatId: null,
+            chatName: null
+        }));
+    }
 
     return (
         <div className="sidebar-chat" onClick={() => dispatch(setChat({chatId: props.id, chatName: props.chatName}))}>
@@ -26,7 +32,7 @@ const Chat = (props) => {
                 <p>{chatInfo[0]?.message.length > 17 ? chatInfo[0]?.message.substr(0, 17) + "..." : chatInfo[0]?.message}</p>
                 <small>{timeago.format(new Date(chatInfo[0]?.timestamp?.toDate()))}</small>
             </div>
-            {props.owner === user?.email ? (<button className="delete-chat" onClick={() => db.collection('chats').doc(props.id).delete()}>delete</button>) : (<></>)}
+            {props.owner === user?.email ? (<button className="delete-chat" onClick={deleteChat}>Delete</button>) : (<></>)}
 
         </div>
 );

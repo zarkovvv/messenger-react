@@ -24,6 +24,8 @@ const ChatBody = () => {
                     data: doc.data()
                 })));
             })
+        } else {
+            setMessages([]);
         }
     }, [chatId]);
 
