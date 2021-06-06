@@ -19,10 +19,14 @@
       color: #6d6d6d;
     }
   }
+  @media screen and (max-width: 700px){
+    margin-left: 20px;
+    padding-right: 5px;
+  }
 }
 
 .send-icon {
-  color: #000000;
+  color: #6a6a6a;
 }
 
 .send-button:hover {
