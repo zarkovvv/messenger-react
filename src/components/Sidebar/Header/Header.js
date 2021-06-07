@@ -10,6 +10,12 @@ const Header = () => {
 
     const user = useSelector(selectUser);
 
+    const sidebarElement = document.getElementsByClassName('sidebar')[0];
+    const sidebarHeaderElement = document.getElementsByClassName('sidebar-header')[0];
+    const sidebarChatsElement = document.getElementsByClassName('sidebar-chats')[0];
+    const sidebarArrowElement = document.getElementById('arrow');
+    const sidebarCloseElement = document.getElementById('close');
+
     return (
         <div className="sidebar-header">
 
@@ -24,7 +30,7 @@ const Header = () => {
                 <RateReviewOutlined className="create-chat"/>
             </IconButton>
 
-            <IconButton id="close" onClick={closeSidebar}>
+            <IconButton id="close" onClick={() => closeSidebar(sidebarElement, sidebarHeaderElement, sidebarChatsElement, sidebarArrowElement, sidebarCloseElement)}>
                 <Close />
             </IconButton>
 

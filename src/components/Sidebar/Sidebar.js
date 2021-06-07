@@ -11,6 +11,12 @@ const Sidebar = () => {
 
     const [chats, setChats] = useState([]);
 
+    const sidebarElement = document.getElementsByClassName('sidebar')[0];
+    const sidebarHeaderElement = document.getElementsByClassName('sidebar-header')[0];
+    const sidebarChatsElement = document.getElementsByClassName('sidebar-chats')[0];
+    const sidebarArrowElement = document.getElementById('arrow');
+    const sidebarCloseElement = document.getElementById('close');
+
     useEffect(() => {
         db.collection('chats').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
             setChats(snapshot.docs.map(doc => ({
@@ -26,7 +32,7 @@ const Sidebar = () => {
             <div className="sidebar-chats">
                 {chats.map(({id, data: {chatName, owner}}) => (<Chat key={id} id={id} chatName={chatName} owner={owner}/>))}
             </div>
-            <IconButton id="arrow" onClick={openSidebar}>
+            <IconButton id="arrow" onClick={() => openSidebar(sidebarElement, sidebarHeaderElement, sidebarChatsElement, sidebarArrowElement, sidebarCloseElement)}>
                 <ArrowForwardIos />
             </IconButton>
         </div>

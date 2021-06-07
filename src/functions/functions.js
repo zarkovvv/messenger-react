@@ -1,5 +1,5 @@
 import db, {auth, provider} from "../firebase";
-import firebase from "firebase";
+import firebase from "firebase/app";
 import {setChat} from "../features/chatSlice";
 
 export const sendMessage = (e, input, setInput, chatId, user) => {
@@ -51,13 +51,7 @@ export async function signOut() {
     await auth.signOut();
 }
 
-const sidebarElement = document.getElementsByClassName('sidebar')[0];
-const sidebarHeaderElement = document.getElementsByClassName('sidebar-header')[0];
-const sidebarChatsElement = document.getElementsByClassName('sidebar-chats')[0];
-const sidebarArrowElement = document.getElementById('arrow');
-const sidebarCloseElement = document.getElementById('close');
-
-export function closeSidebar() {
+export function closeSidebar(sidebarElement, sidebarHeaderElement, sidebarChatsElement, sidebarArrowElement, sidebarCloseElement) {
     sidebarElement.classList.remove('clicked');
     sidebarHeaderElement.classList.remove('clicked');
     sidebarChatsElement.classList.remove('clicked');
@@ -65,7 +59,7 @@ export function closeSidebar() {
     sidebarCloseElement.classList.remove('clicked');
 }
 
-export function openSidebar() {
+export function openSidebar(sidebarElement, sidebarHeaderElement, sidebarChatsElement, sidebarArrowElement, sidebarCloseElement) {
     sidebarElement.classList.add('clicked');
     sidebarHeaderElement.classList.add('clicked');
     sidebarChatsElement.classList.add('clicked');
