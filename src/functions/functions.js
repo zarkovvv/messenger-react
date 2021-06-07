@@ -19,7 +19,7 @@ export const sendMessage = (e, input, setInput, chatId, user) => {
 };
 
 export const signIn = () => {
-    auth.signInWithPopup(provider).catch((error) => alert(error.message));
+    auth.signInWithRedirect(provider).catch((error) => alert(error.message));
 }
 
 export async function deleteChat(dispatch, props) {
