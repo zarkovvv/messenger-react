@@ -30,16 +30,16 @@ function App() {
         })}, 2000);
     }, [dispatch]);
 
-    if (loading) {
-        return (<Loader />)
-    } else {
-        return (
-            <div className='app'>
-                {user ? (<Main />) : (<Login />)}
-            </div>
-        );
-
-    }
+    return (
+        <React.Fragment>
+            {
+                loading ? (<Loader />) :
+                (<div className='app'>
+                    {user ? (<Main />) : (<Login />)}
+                </div>)
+            }
+        </React.Fragment>
+    );
 }
 
 export default App;
