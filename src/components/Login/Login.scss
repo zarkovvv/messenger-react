@@ -6,9 +6,13 @@
 }
 
 .login-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
   object-fit: contain;
-  height: 150px;
-  width: 150px;
+  height: 220px;
+  width: 220px;
 }
 
 .login-button {
