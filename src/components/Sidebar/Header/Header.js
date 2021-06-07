@@ -19,18 +19,18 @@ const Header = () => {
     return (
         <div className="sidebar-header">
 
-            <Avatar src={user.photo} className="sidebar-avatar" onClick={signOut} />
+            <Avatar title="Sign out" src={user.photo} className="sidebar-avatar" onClick={signOut} />
 
             <div className="sidebar-input">
                 <Search />
                 <input type="text" placeholder="Search"/>
             </div>
 
-            <IconButton variant="outlined"  onClick={() => createChat(user)}>
+            <IconButton variant="outlined" title="Create new chat" onClick={() => createChat(user)}>
                 <RateReviewOutlined className="create-chat"/>
             </IconButton>
 
-            <IconButton id="close" onClick={() => closeSidebar(sidebarElement, sidebarHeaderElement, sidebarChatsElement, sidebarArrowElement, sidebarCloseElement)}>
+            <IconButton id="close" title="Close" onClick={() => closeSidebar(sidebarElement, sidebarHeaderElement, sidebarChatsElement, sidebarArrowElement, sidebarCloseElement)}>
                 <Close />
             </IconButton>
 
