@@ -8,6 +8,7 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import db from "../../../firebase";
 import {selectUser} from "../../../features/userSlice";
+import {sendMessage} from "../../../functions/functions";
 
 const ChatInput = () => {
 
@@ -16,28 +17,12 @@ const ChatInput = () => {
 
     const [input, setInput] = useState('');
 
-    const sendMessage = (e) => {
-        e.preventDefault();
-        if (input !== '') {
-            db.collection('chats').doc(chatId).collection('messages').add({
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                message: input,
-                uid: user.uid,
-                photo: user.photo,
-                email: user.email,
-                displayName: user.displayName
-            });
-            db.collection('chats').doc(chatId).update({timestamp: firebase.firestore.FieldValue.serverTimestamp()});
-            setInput('');
-        }
-    };
-
     return (
         <div className="chat-input">
             <form onSubmit={sendMessage}>
                 <input disabled={chatId === null} value={input} onChange={e => setInput(e.target.value)} type="text" placeholder="Send a message..."/>
             </form>
-            <IconButton className="send-button" onClick={sendMessage}>
+            <IconButton className="send-button" onClick={(e) => sendMessage(e, input, setInput, chatId, user)}>
                 <Send className="send-icon" />
             </IconButton>
         </div>

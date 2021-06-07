@@ -2,14 +2,10 @@ import React from 'react';
 import './Login.scss';
 import {Button} from "@material-ui/core";
 import {ReactComponent as LoginLogo} from '../../static/images/chat-svgrepo-com.svg';
-import {auth, provider} from "../../firebase";
 import {AnimatePresence, motion} from "framer-motion";
+import {signIn} from "../../functions/functions";
 
 const Login = () => {
-
-    const signIn = () => {
-        auth.signInWithPopup(provider).catch((error) => alert(error.message));
-    }
 
     return (
         <AnimatePresence>
