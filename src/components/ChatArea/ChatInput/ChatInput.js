@@ -5,12 +5,15 @@ import {IconButton} from "@material-ui/core";
 import {useSelector} from "react-redux";
 import {selectChatId} from "../../../features/chatSlice";
 import "firebase/firestore";
+import app from "firebase/app";
+import firebase from "firebase/app";
+import 'firebase/storage';
+import db from '../../../firebase'
+
 import {selectUser} from "../../../features/userSlice";
 import {sendMessage} from "../../../functions/functions";
 
-import app from "firebase";
-import firebase from "firebase/app";
-import db from '../../../firebase'
+
 const ChatInput = () => {
 
     const chatId = useSelector(selectChatId);
