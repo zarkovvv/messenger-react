@@ -44,17 +44,15 @@ const ChatInput = () => {
             <IconButton className="send-button" onClick={(e) => sendMessage(e, input, setInput, chatId, user)}>
                 <Send className="send-icon" />
             </IconButton>
-            <label htmlFor="upload-button">
-                <IconButton className="image-button">
-                    <Image className="picture-icon"/>
-                </IconButton>
-            </label>
-            <input type="file"
-                   multiple={false}
-                   id="upload-button"
-                   style={{display: 'none'}}
-                   onChange={handleUpload}
-            />
+            <IconButton component="label" className="image-button">
+                <input type="file"
+                       multiple={false}
+                       id="upload-button"
+                       style={{display: 'none'}}
+                       onChange={handleUpload}
+                />
+                <Image className="picture-icon"/>
+            </IconButton>
         </div>
     );
 };
