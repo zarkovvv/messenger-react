@@ -8,7 +8,7 @@ import "firebase/firestore";
 import {selectUser} from "../../../features/userSlice";
 import {sendMessage} from "../../../functions/functions";
 
-import app from "firebase/app";
+import app from "firebase";
 import firebase from "firebase/app";
 import db from '../../../firebase'
 const ChatInput = () => {
