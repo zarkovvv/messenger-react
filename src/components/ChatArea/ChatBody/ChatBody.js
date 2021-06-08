@@ -37,7 +37,7 @@ const ChatBody = () => {
     return (
         <div className="messages">
             <FlipMove>
-                {messages.map(message => (<Message key={message.id} contents={message.data} />))}
+                {chatId === null ? <div className="prompt-message"><h2>Please select a chatroom.</h2></div> : messages.map(message => (<Message key={message.id} contents={message.data} />))}
             </FlipMove>
             <div ref={messagesEndRef} />
         </div>

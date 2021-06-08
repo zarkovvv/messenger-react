@@ -10,3 +10,16 @@
     margin-left: 24px;
   }
 }
+
+.prompt-message {
+  display: flex;
+  height: 100%;
+  margin-top: 30vh;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+
+  & > h2 {
+    font-style: italic;
+  }
+}
