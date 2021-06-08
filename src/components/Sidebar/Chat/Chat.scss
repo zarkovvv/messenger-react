@@ -7,6 +7,10 @@
   cursor: pointer;
   position: relative;
   transition: all 0.2s;
+  &.current {
+    background: #1f3171;
+    color: white;
+  }
   &:hover {
     background: #1f3171;
     color: white;

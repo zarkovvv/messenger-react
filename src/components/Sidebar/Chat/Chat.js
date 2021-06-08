@@ -20,7 +20,7 @@ const Chat = (props) => {
     }, [props.id]);
 
     return (
-        <div className="sidebar-chat" onClick={() => setCurrentChat(dispatch, props)}>
+        <div className={props.current ? 'sidebar-chat current' : 'sidebar-chat'} onClick={() => setCurrentChat(dispatch, props)}>
             <Avatar src={chatInfo[0]?.photo} className="chat-avatar"/>
             <div className="sidebar-chat-info">
                 <h3>{props.chatName}</h3>
