@@ -12,6 +12,7 @@ const Chat = (props) => {
     const dispatch = useDispatch();
     const user = useSelector(selectUser);
     const [chatInfo, setChatInfo] = useState([]);
+    const username = user.displayName;
 
     useEffect(() => {
         db.collection('chats').doc(props.id).collection('messages').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
@@ -24,7 +25,7 @@ const Chat = (props) => {
             <Avatar src={chatInfo[0]?.photo} className="chat-avatar"/>
             <div className="sidebar-chat-info">
                 <h3>{props.chatName}</h3>
-                <p>{chatInfo[0]?.message.length > 17 ? chatInfo[0]?.message.substr(0, 17) + "..." : chatInfo[0]?.message}</p>
+                {chatInfo[0]?.message === undefined ? (<p style={{fontStyle: "italic", fontSize: "14px"}}>{username} sent an image</p>) : (<p style={{fontStyle: "italic", fontSize: "14px"}}>{username}: {chatInfo[0]?.message.length > 17 ? chatInfo[0]?.message.substr(0, 17) + "..." : chatInfo[0]?.message}</p>)}
                 <small>{timeago.format(new Date(chatInfo[0]?.timestamp?.toDate()))}</small>
             </div>
             {props.owner === user?.email ? (
