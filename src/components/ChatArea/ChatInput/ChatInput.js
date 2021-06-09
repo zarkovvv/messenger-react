@@ -29,6 +29,12 @@ const ChatInput = () => {
         e.preventDefault();
         const file = e.target.files[0];
 
+        if (file.type.split("/")[0] !== "image") {
+            alert("Only image upload is permitted!");
+            imageUploadInput.current.value = '';
+            return;
+        }
+
         Object.defineProperty(file, 'name', {
             writable: true,
             value: `${uniqid()}.${file.type.split("/")[1]}`
@@ -56,10 +62,10 @@ const ChatInput = () => {
             <form onSubmit={(e) => sendMessage(e, input, setInput, chatId, user)}>
                 <input disabled={chatId === null} value={input} onChange={e => setInput(e.target.value)} type="text" placeholder="Send a message..."/>
             </form>
-            <IconButton className="send-button" onClick={(e) => sendMessage(e, input, setInput, chatId, user)}>
+            <IconButton disabled={chatId === null} className="send-button" onClick={(e) => sendMessage(e, input, setInput, chatId, user)}>
                 <Send className="send-icon" />
             </IconButton>
-            <IconButton component="label" className="image-button">
+            <IconButton disabled={chatId === null} component="label" className="image-button">
                 <input type="file"
                        multiple={false}
                        id="upload-button"
