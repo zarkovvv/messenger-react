@@ -12,7 +12,10 @@ import {selectChatId} from "../../features/chatSlice";
 const Sidebar = () => {
 
     const [chats, setChats] = useState([]);
+    const [search, setSearch] = useState('');
     const currentChatId = useSelector(selectChatId);
+
+    const filteredChats = chats.filter(c => c.data.chatName.toLowerCase().includes(search.toLowerCase()));
 
     const sidebarElement = document.getElementsByClassName('sidebar')[0];
     const sidebarHeaderElement = document.getElementsByClassName('sidebar-header')[0];
@@ -31,9 +34,9 @@ const Sidebar = () => {
 
     return (
         <div className="sidebar">
-            <Header />
+            <Header setSearch={setSearch}/>
             <div className="sidebar-chats">
-                {chats.map(({id, data: {chatName, owner}}) => (<Chat key={id} id={id} chatName={chatName} owner={owner} current={currentChatId === id}/>))}
+                {filteredChats.map(({id, data: {chatName, owner}}) => (<Chat key={id} id={id} chatName={chatName} owner={owner} current={currentChatId === id}/>))}
             </div>
             <IconButton id="arrow" onClick={() => openSidebar(sidebarElement, sidebarHeaderElement, sidebarChatsElement, sidebarArrowElement, sidebarCloseElement)}>
                 <ArrowForwardIos />

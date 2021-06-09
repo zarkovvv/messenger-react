@@ -6,7 +6,7 @@ import {useSelector} from "react-redux";
 import {selectUser} from "../../../features/userSlice";
 import {closeSidebar, createChat, signOut} from "../../../functions/functions";
 
-const Header = () => {
+const Header = ({setSearch}) => {
 
     const user = useSelector(selectUser);
 
@@ -23,7 +23,7 @@ const Header = () => {
 
             <div className="sidebar-input">
                 <Search />
-                <input type="text" placeholder="Search"/>
+                <input type="text" placeholder="Search" onChange={(e) => setSearch(e.target.value.toString())}/>
             </div>
 
             <IconButton variant="outlined" title="Create new chat" onClick={() => createChat(user)}>
