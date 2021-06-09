@@ -3,7 +3,6 @@ import './Message.scss';
 import {Avatar} from "@material-ui/core";
 import {useSelector} from "react-redux";
 import {selectUser} from "../../../../features/userSlice";
-
 const Message = forwardRef((props, ref) => {
 
     const user = useSelector(selectUser);

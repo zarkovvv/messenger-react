@@ -1,9 +1,12 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import './ChatInput.scss';
 import {Image, Send} from "@material-ui/icons";
 import {IconButton} from "@material-ui/core";
 import {useSelector} from "react-redux";
 import {selectChatId} from "../../../features/chatSlice";
+
+import uniqid from 'uniqid';
+
 import "firebase/firestore";
 import app from "firebase/app";
 import firebase from "firebase/app";
@@ -20,10 +23,17 @@ const ChatInput = () => {
     const user = useSelector(selectUser);
 
     const [input, setInput] = useState('');
+    const imageUploadInput = useRef(null);
 
     async function handleUpload(e) {
         e.preventDefault();
         const file = e.target.files[0];
+
+        Object.defineProperty(file, 'name', {
+            writable: true,
+            value: `${uniqid()}.${file.type.split("/")[1]}`
+        });
+
         const storageRef = app.storage().ref();
         const fileRef = storageRef.child(file.name);
         await fileRef.put(file);
@@ -37,6 +47,8 @@ const ChatInput = () => {
             email: user.email,
             displayName: user.displayName
         });
+
+        imageUploadInput.current.value = '';
     }
 
     return (
@@ -53,6 +65,7 @@ const ChatInput = () => {
                        id="upload-button"
                        style={{display: 'none'}}
                        onChange={handleUpload}
+                       ref={imageUploadInput}
                 />
                 <Image className="picture-icon"/>
             </IconButton>
