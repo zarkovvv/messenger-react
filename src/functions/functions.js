@@ -1,6 +1,12 @@
 import db, {auth, provider} from "../firebase";
-import firebase from "firebase/app";
 import {setChat} from "../features/chatSlice";
+
+import uniqid from "uniqid";
+
+import firebase from "firebase/app";
+import app from "firebase/app";
+import "firebase/firestore";
+import 'firebase/storage';
 
 export const sendMessage = (e, input, setInput, chatId, user) => {
     e.preventDefault();
@@ -17,6 +23,38 @@ export const sendMessage = (e, input, setInput, chatId, user) => {
         setInput('');
     }
 };
+
+export async function handleUpload(e, imageUploadInput, user, chatId) {
+    e.preventDefault();
+    const file = e.target.files[0];
+
+    if (file.type.split("/")[0] !== "image") {
+        alert("Only image upload is permitted!");
+        imageUploadInput.current.value = '';
+        return;
+    }
+
+    Object.defineProperty(file, 'name', {
+        writable: true,
+        value: `${uniqid()}.${file.type.split("/")[1]}`
+    });
+
+    const storageRef = app.storage().ref();
+    const fileRef = storageRef.child(file.name);
+    await fileRef.put(file);
+    const fileUrl = await fileRef.getDownloadURL();
+
+    db.collection('chats').doc(chatId).collection('messages').add({
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        image: fileUrl,
+        uid: user.uid,
+        photo: user.photo,
+        email: user.email,
+        displayName: user.displayName
+    });
+
+    imageUploadInput.current.value = '';
+}
 
 export const signIn = () => {
     auth.signInWithRedirect(provider).catch((error) => alert(error.message));

@@ -5,17 +5,10 @@ import {IconButton} from "@material-ui/core";
 import {useSelector} from "react-redux";
 import {selectChatId} from "../../../features/chatSlice";
 
-import uniqid from 'uniqid';
 
-import "firebase/firestore";
-import app from "firebase/app";
-import firebase from "firebase/app";
-import 'firebase/storage';
-import db from '../../../firebase'
 
 import {selectUser} from "../../../features/userSlice";
-import {sendMessage} from "../../../functions/functions";
-
+import {handleUpload, sendMessage} from "../../../functions/functions";
 
 const ChatInput = () => {
 
@@ -24,38 +17,6 @@ const ChatInput = () => {
 
     const [input, setInput] = useState('');
     const imageUploadInput = useRef(null);
-
-    async function handleUpload(e) {
-        e.preventDefault();
-        const file = e.target.files[0];
-
-        if (file.type.split("/")[0] !== "image") {
-            alert("Only image upload is permitted!");
-            imageUploadInput.current.value = '';
-            return;
-        }
-
-        Object.defineProperty(file, 'name', {
-            writable: true,
-            value: `${uniqid()}.${file.type.split("/")[1]}`
-        });
-
-        const storageRef = app.storage().ref();
-        const fileRef = storageRef.child(file.name);
-        await fileRef.put(file);
-        const fileUrl = await fileRef.getDownloadURL();
-
-        db.collection('chats').doc(chatId).collection('messages').add({
-            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-            image: fileUrl,
-            uid: user.uid,
-            photo: user.photo,
-            email: user.email,
-            displayName: user.displayName
-        });
-
-        imageUploadInput.current.value = '';
-    }
 
     return (
         <div className="chat-input">
@@ -70,7 +31,7 @@ const ChatInput = () => {
                        multiple={false}
                        id="upload-button"
                        style={{display: 'none'}}
-                       onChange={handleUpload}
+                       onChange={(e) => handleUpload(e, imageUploadInput, user, chatId)}
                        ref={imageUploadInput}
                 />
                 <Image className="picture-icon"/>
