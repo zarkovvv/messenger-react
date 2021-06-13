@@ -32,7 +32,7 @@ const ChatBody = () => {
 
     useEffect(() => {
         scrollToBottom();
-    }, [messages])
+    }, [messages]);
 
     return (
         <div className="messages">
